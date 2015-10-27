@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Calculator from Calculoid.com" title_url="http://calculoid.com/"
+          description="Include an interactive calculator built with Calculoid.com"
+          thumbnail="http://calculoid.com/templates/gk_simplicity/images/style3/logo_normal.png"
+          screenshot="http://calculoid.com/templates/gk_simplicity/images/style3/logo_normal.png"
+          height="600" width="600" author="Calculoid">
+    <Require feature="dynamic-height"/>
+  </ModulePrefs>
+  <UserPref name="calculator_id" display_name="Calculator ID" required="true"/>
+  <UserPref name="api_key" display_name="API key" required="false"/>
+  <UserPref name="show_title" display_name="Show Title" default_value="1" datatype="enum">
+    <EnumValue value="1" display_value="Yes"/>
+    <EnumValue value="0" display_value="No"/>
+  </UserPref>
+  <UserPref name="show_description" display_name="Show Description" default_value="1" datatype="enum">
+    <EnumValue value="1" display_value="Yes"/>
+    <EnumValue value="0" display_value="No"/>
+  </UserPref>
+  <UserPref name="scroll" display_name="Display scrollbar" default_value="auto" datatype="enum">
+    <EnumValue value="auto" display_value="Automatic"/>
+    <EnumValue value="no" display_value="No"/>
+    <EnumValue value="yes" display_value="Yes"/>
+  </UserPref>
+  <Content type="html"><![CDATA[
+  <div id='dest'>
+    <svg width='150px' height='150px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(0 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(30 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.08333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(60 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.16666666666666666s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(90 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.25s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(120 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.3333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(150 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.4166666666666667s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(180 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.5s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(210 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.5833333333333334s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(240 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.6666666666666666s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(270 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.75s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(300 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.8333333333333334s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(330 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.9166666666666666s' repeatCount='indefinite'/></rect></svg>
+  </div>
+  <script type="text/javascript">
+  gadgets.util.registerOnLoadHandler(doRender);
+
+  function doRender(){
+    // setup variables
+    var prefs = new gadgets.Prefs();
+    var iframeURL = 'https://api.calculoid.com/iframe/calculator/' + prefs.getString('calculator_id') + '?apiKey=' + prefs.getString('api_key') + '?showTitle=' + prefs.getString('show_title') + '?showDescription=' + prefs.getString('show_description');
+    var scroll = prefs.getString('scroll');
+    var height = 800;
+    var width = 600;
+
+    if (gadgets.window) {
+      var viewport = gadgets.window.getViewportDimensions();
+      if (viewport.width) {
+        var width = viewport.width;
+      }
+      if (viewport.height) {
+        var height = viewport.height;
+      }
+    }
+
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('width', width);
+    iframe.setAttribute('height', height);
+    iframe.setAttribute('frameborder','no');
+    if(scroll){
+      iframe.setAttribute('scrolling', scroll);
+    }
+    iframe.setAttribute('src', iframeURL);
+
+    // set the slideshow to the placeholder div
+    var dest = document.getElementById('dest');
+    dest.innerHTML = '';
+    dest.appendChild(iframe);
+  }
+  </script>
+  ]]>
+  </Content>
+</Module>
