@@ -32,7 +32,7 @@
   function doRender(){
     // setup variables
     var prefs = new gadgets.Prefs();
-    var iframeURL = 'https://api.calculoid.com/iframe/calculator/' + prefs.getString('calculator_id') + '?apiKey=' + prefs.getString('api_key') + '?showTitle=' + prefs.getString('show_title') + '?showDescription=' + prefs.getString('show_description');
+    var iframeURL = 'https://api.calculoid.com/iframe/calculator/' + prefs.getString('calculator_id') + '?apiKey=' + prefs.getString('api_key') + '&showTitle=' + prefs.getString('show_title') + '&showDescription=' + prefs.getString('show_description');
     var scroll = prefs.getString('scroll');
     var height = 800;
     var width = 600;
