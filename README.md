@@ -19,3 +19,5 @@ At the page detail:
 7. Insert your API key to get the benefits of your Calculoid account (view limits and so on).
 8. Configure the rest of options as you'd like. You can get back later and change them.
 9. Hit OK and then Save.
+
+## [Live demo](https://sites.google.com/site/calculoidgadgetpreview/)
